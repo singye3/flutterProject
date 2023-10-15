@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Namer App',
         theme: ThemeData(
           useMaterial3: true,
@@ -228,7 +229,7 @@ class BigCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var style = theme.textTheme.displayMedium!.copyWith(
-      color: theme.colorScheme.onPrimary,
+      color: theme.colorScheme.onSecondary,
     );
 
     return Card(
@@ -249,7 +250,7 @@ class BigCard extends StatelessWidget {
                 SizedBox(width: 10.0),
                 Text(
                   pair.second,
-                  style: style.copyWith(fontWeight: FontWeight.bold),
+                  style: style.copyWith(fontWeight: FontWeight.w400),
                 )
               ],
             ),
@@ -291,12 +292,11 @@ class FavoritesPage extends StatelessWidget {
               for (var pair in appState.favorites)
                 ListTile(
                   leading: IconButton(
-                    icon: Icon(
-                      Icons.favorite,
-                      semanticLabel: "delete",
-                    ),
+                    icon: Icon(Icons.delete_outline, semanticLabel: 'Delete'),
                     color: theme.colorScheme.primary,
-                    onPressed: () {},
+                    onPressed: () {
+                      appState.removeFavorite(pair);
+                    },
                   ),
                   title: Text(
                     pair.asLowerCase,
