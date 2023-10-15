@@ -12,15 +12,14 @@ class _ShowWordState extends State<ShowWord> {
   bool deleteFav = false;
   @override
   Widget build(BuildContext context) {
-    data = data!.isNotEmpty
+    data = data.isNotEmpty
         ? data
         : ModalRoute.of(context)?.settings.arguments as Map;
     var theme = ThemeData(
       useMaterial3: true,
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
     );
 
-    print(data);
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -42,8 +41,8 @@ class _ShowWordState extends State<ShowWord> {
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: ListTile(
-              title: Text(data?['wordName']),
-              subtitle: Text(data?['description']),
+              title: Text(data['wordName']),
+              subtitle: Text(data['description']),
               leading: IconButton(
                 icon: Icon(
                   deleteFav ? Icons.favorite_border : Icons.favorite,
@@ -53,7 +52,6 @@ class _ShowWordState extends State<ShowWord> {
                 // color: Colors.red,
                 onPressed: () {
                   // appState.removeFavorite(pair);
-                  print("inside how wod $deleteFav");
                   setState(() {
                     deleteFav = !deleteFav;
                   });
